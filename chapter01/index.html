@@ -7,5 +7,43 @@
 	<div style="position: absolute; top:50px; left:50px; background-color:red;">
 		Hello World!
 	</div>
+	<canvas id="canvasOne" width="500" height="500"></canvas>
 </body>
+<script type="text/javascript">
+	function canvasSupport(){
+			return !!document.createElement('testcanvas').getContext;
+	}
+
+	function canvasApp(){
+		console.log("test")
+		// if (!canvasSupport()){return;}
+		
+		var theCanvas = document.getElementById("canvasOne");
+		var ctx = theCanvas.getContext("2d");
+
+		function drawScreen(){
+			console.info("test");			
+
+			ctx.fillStyle = "#ffffaa";
+			ctx.fillRect(0, 0, 500, 300);
+
+			ctx.fillStyle = "#000000";
+			ctx.font = "20px _sans";
+			ctx.textBaseline = "top";
+			ctx.fillText ("Hello World!", 195, 80);
+
+			ctx.strokeStyle = "#000000";
+			ctx.strokeRect(5, 5, 490, 290);
+
+		}
+
+		drawScreen();
+	}
+
+	window.addEventListener('load', eventWindowLoaded, false);
+
+	function eventWindowLoaded(){
+		canvasApp();
+	}
+</script>
 </html>
