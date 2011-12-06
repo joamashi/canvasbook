@@ -27,12 +27,19 @@
 
 		function drawScreen(){
 			console.log('draw!!');
-			ctx.fillStyle = '#aaaaaa';
-			ctx.fillRect(0, 0, 200, 200);
-			ctx.fillStyle = '#000000';
-			ctx.font = '20px _sans';
-			ctx.textBaseline = 'top';
-			ctx.fillText('Canvas!', 10, 20);
+			// ctx.fillStyle = '#aaaaaa';
+			// ctx.fillRect(0, 0, 200, 200);
+			// ctx.fillStyle = '#000000';
+			// ctx.font = '20px _sans';
+			// ctx.textBaseline = 'top';
+			// ctx.fillText('Canvas!', 10, 20);
+
+			ctx.fillStyle = '#003300';
+			ctx.strokeStyle = '#ff00ff';
+			ctx.lineWidth = 2;
+			ctx.fillRect(10, 10, 40, 40);
+			ctx.strokeRect(0, 0, 60, 60);
+			ctx.clearRect(20, 20, 20, 20);
 		}
 
 	}
