@@ -1,0 +1,44 @@
+<!doctype thml>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="/lib/modernizr-2.0.6.js"></script>
+	<script type="text/javascript">
+	window.addEventListener('load', eventWindowLoaded, false);
+
+	function eventWindowLoaded(){
+		canvasApp();
+	}
+
+	function canvasSupport(){
+		return Modernizr.canvas;
+	}
+
+	function canvasApp(){
+		if( !canvasSupport() ){
+			return;
+		}else{
+			var theCanvas = document.getElementById('canvas');
+			var ctx = theCanvas.getContext('2d');
+		}
+
+		drawScreen();
+
+		function drawScreen(){
+			ctx.fillStyle = '#aaaaaa';
+			ctx.fillRect(0, 0, 200, 200);
+			ctx.fillStyle = '#000000';
+			ctx.font = '20px _sans';
+			ctx.textBaseline = 'top';
+			ctx.fillText('Canvas!', 0, 0);
+		}
+	}
+	</script>
+</head>
+<body>
+	<div style="position:absolute: top:50px; left:50px;">
+		<canvas id="canvas" width="500" height="500"></canvas>
+	</div>
+</body>
+</html>
