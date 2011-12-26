@@ -5,12 +5,15 @@
 	<meta charset="UTF-8">
 	<script type="text/javascript" src="/lib/modernizr-2.0.6.js"></script>
 	<script type="text/javascript">
-	var spaceShip = new Image();
-	spaceShip.src = 'link.png';
-	// spaceShip.addEventListener('load', eventWindowLoaded, false);
 	var ws = new Image();
 	ws.src = 'ico_w.png';
 	var ctn = 0;
+	var animationFrames = [1,2,3,4,5,6,7,8];
+	var frameIndex = 0;
+	var dx = 0;
+	var dy = -1;
+	var x = 50;
+	var y = 50;
 
 	window.addEventListener('load', eventWindowLoaded, false);
 
@@ -35,22 +38,27 @@
 
 		function drawScreen(){
 			console.log('drawScreen();');
+
+			y = y+dy;
+			x = x+dx;
+			
 			ctx.fillStyle = '#aaaaaa';
 			ctx.fillRect(0, 0, 200, 200);
-			placeShip(ctx, spaceShip, 0, 0)
-			placeShip(ctx, spaceShip, 0, 32, 32, 32);
-			placeShip(ctx, spaceShip, 0, 64, 64, 64);
-			placeShip(ctx, spaceShip, 50, 50);
-			ctx.drawImage(ws, 0, 32*ctn, 38, 32, 100, 100, 38, 32);
 
-			ctn++;
-			if(ctn >3){
-				ctn = 0;
+			var sourceX = 0;
+			var sourceY = Math.floor(animationFrames[frameIndex]%8) * 32
+
+			ctx.drawImage( ws, sourceX, sourceY, 38, 28, x, y, 38, 28);
+
+			frameIndex++;
+			if( frameIndex==animationFrames.length){
+				frameIndex=0;
 			}
+
 		}
 
 		function startUp(){
-			setInterval(drawScreen, 1000);
+			setInterval(drawScreen, 100);
 		}
 
 		function placeShip(ctx, obj, posX, posY, width, height){
