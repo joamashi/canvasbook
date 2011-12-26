@@ -5,14 +5,35 @@
 	<meta charset="UTF-8">
 	<script type="text/javascript" src="/lib/modernizr-2.0.6.js"></script>
 	<script type="text/javascript">
+	/**
+ * Provides requestAnimationFrame in a cross browser way.
+ * @author paulirish / http://paulirish.com/
+ */
+
+if ( !window.requestAnimationFrame ) {
+
+	window.requestAnimationFrame = ( function() {
+
+		return window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element ) {
+
+			window.setTimeout( callback, 1000 / 60 );
+
+		};
+
+	} )();
+
+}
+
 	var ws = new Image();
 	ws.src = 'ico_w.png';
 	var ctn = 0;
 	var animationFrames = [1,2,3,4,5,6,7,8];
 	var frameIndex = 0;
 	var rotation = 90;
-	var dx = 0;
-	var dy = -1;
 	var x = 50;
 	var y = 50;
 	var angleInRadians = 0;
@@ -40,10 +61,6 @@
 
 		function drawScreen(){
 			console.log('drawScreen();');
-
-			// y = y+dy;
-			// x = x+dx;
-
 			
 			ctx.fillStyle = '#aaaaaa';
 			ctx.fillRect(0, 0, 200, 200);
@@ -72,7 +89,8 @@
 		}
 
 		function startUp(){
-			setInterval(drawScreen, 50);
+			// setInterval(drawScreen, 50);
+			requestAnimationFrame(drawScreen)
 		}
 
 		function placeShip(ctx, obj, posX, posY, width, height){
