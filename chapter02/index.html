@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chater02</title>
+	<script type="text/javascript" src="../modernizr.js"></script>
+	<script type="text/javascript">
+	window.addEventListener('load', eventWindowLoaded, false);
+
+	function eventWindowLoaded(){
+		canvasApp();
+	}
+
+	function canvasSupport(){
+		return Modernizr.canvas;
+	}
+
+	function canvasApp(){
+		if(!canvasSupport()){
+			return;
+		}else{
+			var theCanvas = document.getElementById('canvas');
+			var ctx = theCanvas.getContext('2d');
+		}
+
+		drawScreen();
+
+		function drawScreen(){
+			// context.arc(x, y, radius, startAngle, endAngle, anticlockwise)
+			ctx.fillStyle = '#ffffaa';
+			ctx.fillRect(0, 0, 500, 500);
+			ctx.beginPath();
+			ctx.strokeStyle= "black";
+			ctx.lineWidth = 5;
+			// ctx.arc(100, 100, 20, (Math.PI/180)*0, (Math.PI/180)*90, true );
+			ctx.moveTo(0,0);
+			ctx.lineTo(100, 200);
+			// ctx.lineTo(350, 350);
+			// ctx.lineTo(100, 100);
+			ctx.arcTo(350, 350, 100, 100, 20)
+			ctx.stroke();
+			ctx.closePath();
+
+		}
+
+	}
+	</script>
+</head>
+<body>
+	<div>
+		<canvas id='canvas' width='500' height='500'>
+			No support canvas.
+		</canvas>
+	</div>
+	
+</body>
+</html>
