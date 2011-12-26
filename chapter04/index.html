@@ -6,19 +6,17 @@
 	<script type="text/javascript" src="/lib/modernizr-2.0.6.js"></script>
 	<script type="text/javascript">
 	var spaceShip = new Image();
-	spaceShip.addEventListener('load', eventWindowLoaded, false);
 	spaceShip.src = 'link.png';
+	// spaceShip.addEventListener('load', eventWindowLoaded, false);
+	var ws = new Image();
+	ws.src = 'ico_w.png';
+	var ctn = 0;
 
 	window.addEventListener('load', eventWindowLoaded, false);
 
 	function eventWindowLoaded(){
 		canvasApp();
 	}
-
-	function eventShipLoaded(){
-		drawScreen();
-	}
-
 
 	function canvasSupport(){
 		return Modernizr.canvas;
@@ -33,24 +31,26 @@
 		}
 
 
-		drawScreen();
+		startUp();
 
 		function drawScreen(){
 			console.log('drawScreen();');
 			ctx.fillStyle = '#aaaaaa';
 			ctx.fillRect(0, 0, 200, 200);
-			ctx.fillStyle = '#000000';
-			ctx.font = '20px _sans';
-			ctx.textBaseline = 'top';
-			// ctx.fillText('Canvas!', 0, 0);
-			// ctx.drawImage(spaceShip, 0, 0);
-			// ctx.drawImage(spaceShip, 50, 50);
 			placeShip(ctx, spaceShip, 0, 0)
 			placeShip(ctx, spaceShip, 0, 32, 32, 32);
 			placeShip(ctx, spaceShip, 0, 64, 64, 64);
 			placeShip(ctx, spaceShip, 50, 50);
-			
-			
+			ctx.drawImage(ws, 0, 32*ctn, 38, 32, 100, 100, 38, 32);
+
+			ctn++;
+			if(ctn >3){
+				ctn = 0;
+			}
+		}
+
+		function startUp(){
+			setInterval(drawScreen, 1000);
 		}
 
 		function placeShip(ctx, obj, posX, posY, width, height){
